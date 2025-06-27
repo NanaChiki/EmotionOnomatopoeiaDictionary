@@ -21,3 +21,27 @@ for (let i = 0; i < sectionInfo.length; i++) {
   tableOfContents += `<li><a href="#section-${i}">${sectionInfo[i].title}</a></li>`;
 }
 tableOfContents += "</ul>";
+
+
+let containerSection = "<div>";
+for (let i = 0; i <sectionInfo.length; i++) {
+  let currentSection = sectionInfo[i];
+  containerSection += `
+  <div id="section-${i}" class="bg-${currentSection.color} big-square"
+    <h2>${currentSection.title}</h2>
+    <p>${currentSection.description}</p>
+  </div>`;
+}
+containerSection += "</div>";
+
+let htmlString = `
+<h1>Information: We are doing #{id} to jump to a section</h1>
+${tableOfContents}
+${containerSection}
+`;
+
+document.getElementById("target").innerHTML = htmlString;
+
+let obj = sectionInfo[0];
+console.log(Object.keys(obj));
+console.log(Object.values(obj));
