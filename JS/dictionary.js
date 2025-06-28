@@ -1,28 +1,3 @@
-class Word {
-  constructor(word, definition, pictureUrl) {
-    this.word = word;
-    this.definition = definition;
-    this.pictureUrl = pictureUrl;
-  }
-}
-
-class EmotionObject {
-  constructor(emotion, description, color, onomatopoeia) {
-    this.emotion = emotion;
-    this.description = description;
-    this.color = color;
-    this.onomatopoeia = onomatopoeia;
-  }
-
-  getOnomatopoeiaWords() {
-
-  }
-
-  getHtmlContainerString() {
-    
-  }
-}
-
 const dictionary = {
   bark: 'the sound made by a dog',
   grunt: 'issue a low, animal-like noise',
@@ -92,6 +67,54 @@ const pictureDictionary = {
   zing: 'https://cdn.pixabay.com/photo/2017/09/14/16/38/fiber-optic-2749588_1280.jpg',
 };
 
+class Word {
+  constructor(word, definition, pictureUrl) {
+    this.word = word;
+    this.definition = definition;
+    this.pictureUrl = pictureUrl;
+  }
+}
+
+class EmotionObject {
+  constructor(emotion, description, color, onomatopoeia) {
+    this.emotion = emotion;
+    this.description = description;
+    this.color = color;
+    this.onomatopoeia = onomatopoeia;
+  }
+
+  getOnomatopoeiaWords() {
+    return this.onomatopoeia.map(word => new Word(word, dictionary[word], pictureDictionary[word]));
+  }
+
+  getHtmlContainerString() {
+    let emotionDiv = 
+      `<div class="${this.color} emotion_div">
+        <div class="container p-3">
+          <div class="p-3 text-white">
+            <h2>${this.emotion}</h2>
+            <p>${this.description}</p>
+          </div>`;
+
+      const words = this.getOnomatopoeiaWords();
+      for (let i = 0; i < words.length; i++) {
+        emotionDiv += `
+          <div class="bg-white onomatopoeia_words_div col-12 col-md-5 d-flex align-items-center my-2 px-0">
+            <div class="col-8 text-dark">
+              <h4 class="pt-3">${words[i].word}</h4>
+              <p class="pt-2">${dictionary[words[i].word]}</p>
+            </div>
+            <div class="col-4 p-0 d-flex justify-content-center align-items-center">
+              <img src=${words[i].pictureUrl} class="picture p-1 col-12">
+            </div>
+          </div>`;
+      };
+      emotionDiv += '</div></div>'; 
+      return emotionDiv;
+  }
+}
+
+
 const emotions = [
   new EmotionObject(
     'angry',
@@ -135,3 +158,6 @@ const emotions = [
     ['flick', 'gargle', 'oink']
   ),
 ];
+
+console.log(emotions[0].getOnomatopoeiaWords());
+document.getElementById("target").innerHTML = emotions[0].getHtmlContainerString();
