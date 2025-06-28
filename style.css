@@ -1,16 +1,74 @@
-.bg-red {
+.category_section {
+  display: flex;
+  flex-wrap: warp;
+  justify-content: center;
+}
+
+.box_content {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.a-tag {
+  color: inferit;
+  width: 100%;
+}
+
+.a-tag:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.emoji {
+  margin: 0!important;
+  font-size: 2.5rem;
+}
+
+.red {
   background-color: red;
 }
 
-.bg-green {
+.pink {
+  background-color: pink;
+}
+
+.beige {
+  background-color: #98aeb6;
+}
+
+.grey {
+  background-color: grey;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.green {
   background-color: green;
 }
 
-.bg-blue {
-  background-color: blue;
+.orange {
+  background-color: orange;
 }
 
-.big-square {
-  width: 100vw;
-  height: 500px;
+/* Section 2 */
+
+.emotion_div {
+  color: white;
+}
+
+.picture {
+  width: 100%;
+  padding: 4px;
+}
+
+@media (min-width: 768px) {
+  .onomatopoeia_words_div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }
