@@ -93,14 +93,16 @@ class EmotionObject {
 
   getHtmlContainerString() {
     let categoryBox = `
-      <div class="col-12 col-md-6 col-lg-3 p-4 m-4 ${this.color}">
-        <h3>${this.emotion}</h3>
-        <h1>${this.emoji}</h1>
-        <p>${this.description}</p>
-      </div>`;
+    <div class="col-12 col-md-6 col-lg-3 p-4 m-4 ${this.color}">
+      <a href="#${this.emotion}" class="a-tag expandLink">
+        <h3 class="text-center">${this.emotion}</h3>
+        <h1 class="text-center">${this.emoji}</h1>
+        <p class="text-center">${this.description}</p>
+      </a>
+    </div>`;
     
     let emotionBox = 
-      `<div class="${this.color} emotion_div">
+      `<div id="${this.emotion}" class="${this.color}">
         <div class="container p-3">
           <div class="p-3 text-white">
             <h2>${this.emotion}</h2>
@@ -139,7 +141,7 @@ const emotions = [
   new EmotionObject(
     'happy',
     'feeling or showing pleasure or contentment.',
-    'yellow',
+    'pink',
     '💖',
     ['bling', 'chatter', 'chant', 'giggle']
   ),
