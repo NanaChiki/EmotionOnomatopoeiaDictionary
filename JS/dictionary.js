@@ -1,3 +1,4 @@
+// dictionary is an object that maps a word to its definition
 const dictionary = {
   bark: 'the sound made by a dog',
   grunt: 'issue a low, animal-like noise',
@@ -67,6 +68,7 @@ const pictureDictionary = {
   zing: 'https://cdn.pixabay.com/photo/2017/09/14/16/38/fiber-optic-2749588_1280.jpg',
 };
 
+// Word is a class that represents a word and its definition and picture url
 class Word {
   constructor(word, definition, pictureUrl) {
     this.word = word;
@@ -75,11 +77,13 @@ class Word {
   }
 }
 
+// EmotionObject is a class that represents an emotion
 class EmotionObject {
-  constructor(emotion, description, color, onomatopoeia) {
+  constructor(emotion, description, color, emoji, onomatopoeia) {
     this.emotion = emotion;
     this.description = description;
     this.color = color;
+    this.emoji = emoji;
     this.onomatopoeia = onomatopoeia;
   }
 
@@ -88,76 +92,95 @@ class EmotionObject {
   }
 
   getHtmlContainerString() {
-    let emotionDiv = 
+    let categoryBox = `
+      <div class="col-12 col-md-6 col-lg-3 p-4 m-4 ${this.color}">
+        <h3>${this.emotion}</h3>
+        <h1>${this.emoji}</h1>
+        <p>${this.description}</p>
+      </div>`;
+    
+    let emotionBox = 
       `<div class="${this.color} emotion_div">
         <div class="container p-3">
           <div class="p-3 text-white">
             <h2>${this.emotion}</h2>
             <p>${this.description}</p>
-          </div>`;
+          </div>
+          <div class="d-flex justify-content-between flex-wrap">
+          `;
 
       const words = this.getOnomatopoeiaWords();
       for (let i = 0; i < words.length; i++) {
-        emotionDiv += `
-          <div class="bg-white onomatopoeia_words_div col-12 col-md-5 d-flex align-items-center my-2 px-0">
+        emotionBox += `
+          <div class="bg-white col-12 col-md-5 d-flex my-2 px-0">
             <div class="col-8 text-dark">
               <h4 class="pt-3">${words[i].word}</h4>
-              <p class="pt-2">${dictionary[words[i].word]}</p>
+              <p class="pt-2">${words[i].definition}</p>
             </div>
             <div class="col-4 p-0 d-flex justify-content-center align-items-center">
               <img src=${words[i].pictureUrl} class="picture p-1 col-12">
             </div>
           </div>`;
       };
-      emotionDiv += '</div></div>'; 
-      return emotionDiv;
+      emotionBox += '</div></div></div>'; 
+      return [categoryBox, emotionBox];
   }
 }
 
-
+// emotions is an array of EmotionObject instances
 const emotions = [
   new EmotionObject(
     'angry',
     'feeling or showing strong annoyance, displeasure, or hostility; full of anger.',
     'red',
+    '💢',
     ['bark', 'grunt', 'roar', 'whack', 'smack', 'hiss']
   ),
   new EmotionObject(
     'happy',
     'feeling or showing pleasure or contentment.',
     'yellow',
+    '💖',
     ['bling', 'chatter', 'chant', 'giggle']
   ),
   new EmotionObject(
     'bad',
     'not such as to be hoped for or desired; unpleasant or unwelcome.',
     'beige',
+    '🤢',
     ['ahem', 'clatter', 'clunk']
   ),
-  new EmotionObject('sad', 'feeling or showing sorrow; unhappy.', 'grey', [
-    'bawl',
-    'whine',
-    'waah',
-  ]),
+  new EmotionObject(
+    'sad', 
+    'feeling or showing sorrow; unhappy.', 
+    'grey', 
+    '💔',
+    ['bawl','whine','waah']),
   new EmotionObject(
     'surprised',
     'to feel mild astonishment or shock.',
     'purple',
+    '🤯',
     ['boom', 'honk', 'zing']
   ),
   new EmotionObject(
     'fearful',
     'feeling afraid; showing fear or anxiety.',
     'green',
+    '🤨',
     ['buzz', 'caw', 'crawl']
   ),
   new EmotionObject(
     'disgusted',
     'feeling or showing strong annoyance, displeasure, or hostility; full of anger.',
     'orange',
+    '🤮',
     ['flick', 'gargle', 'oink']
   ),
 ];
 
-console.log(emotions[0].getOnomatopoeiaWords());
-document.getElementById("target").innerHTML = emotions[0].getHtmlContainerString();
+// htmlSections is an array of the two sections in the index.html file
+const htmlSections = [
+  document.getElementById("categories-section"),
+  document.getElementById("results-section")
+];

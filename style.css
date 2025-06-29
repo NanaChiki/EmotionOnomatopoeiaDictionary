@@ -11,10 +11,10 @@
   color: white;
 }
 
-.a-tag {
+/* .a-tag {
   color: inferit;
   width: 100%;
-}
+} */
 
 .a-tag:hover {
   color: inherit;
