@@ -1,24 +1,17 @@
-.category_section {
+.categories {
   display: flex;
-  flex-wrap: warp;
   justify-content: center;
-  color: white;
+  flex-wrap: wrap;
 }
 
 .expandLink {
+  padding: 1.5rem;
   position: relative;
   z-index: 1;
   display: block; /* Make it fill the container */
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  text-decoration: none; /* Remove underline */
-}
-
-.box_content {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  color: white;
+  width: 100%; /*Full width*/
+  height: 100%; /*Full height*/
+  text-decoration: none; /*Remove underline*/
 }
 
 .a-tag {

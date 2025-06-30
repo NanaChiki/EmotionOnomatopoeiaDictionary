@@ -92,8 +92,9 @@ class EmotionObject {
   }
 
   getHtmlContainerString() {
+    ///////// I'll handle the issue of the a tag not being expanded to the full width of the container tomorrow
     let categoryBox = `
-    <div class="col-12 col-md-6 col-lg-3 p-4 m-4 ${this.color}">
+    <div class="col-12 col-md-6 col-lg-3 m-4 p-0 ${this.color}">
       <a href="#${this.emotion}" class="a-tag expandLink">
         <h3 class="text-center">${this.emotion}</h3>
         <h1 class="text-center">${this.emoji}</h1>
